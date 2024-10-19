@@ -92,9 +92,9 @@ export const Cover = ({
       <motion.span
         key={String(hovered)}
         animate={{
-          scale: hovered ? 0.8 : 1,
-          x: hovered ? [0, -30, 30, -30, 30, 0] : 0,
-          y: hovered ? [0, 30, -30, 30, -30, 0] : 0,
+          scale: hovered ? 1.05 : 1,
+          x: hovered ? [0, -0, 0, -0, 0, 0] : 0, /*30 */
+          y: hovered ? [0, 0, -0, 0, -0, 0] : 0,
         }}
         exit={{
           filter: "none",

@@ -16,8 +16,8 @@ const Services = () => {
     <Section id="About">
       <div className="container">
         <Heading
-          title="Generative AI made for creators."
-          text="Brainwave unlocks the potential of AI-powered applications"
+          title="AI Agents Made for Businesses."
+          text="QState unlocks the potential of businesses through artificial intelligence"
         />
 
         <div className="relative">
@@ -35,7 +35,7 @@ const Services = () => {
             <div className="relative z-1 max-w-[17rem] ml-auto">
               <h4 className="h4 mb-4">Smartest AI</h4>
               <p className="body-2 mb-[3rem] text-n-3">
-                Brainwave unlocks the potential of AI-powered applications
+                QState uses latest approaches in industry to solve problems
               </p>
               <ul className="body-2">
                 {brainwaveServices.map((item, index) => (
@@ -66,10 +66,9 @@ const Services = () => {
               </div>
 
               <div className="absolute inset-0 flex flex-col justify-end p-8 bg-gradient-to-b from-n-8/0 to-n-8/90 lg:p-15">
-                <h4 className="h4 mb-4">Photo editing</h4>
+                <h4 className="h4 mb-4">Enhance Productivity</h4>
                 <p className="body-2 mb-[3rem] text-n-3">
-                  Automatically enhance your photos using our AI app&apos;s
-                  photo editing feature. Try it now!
+                  Automatically enhance your productivity using our service&apos;s. Try now!
                 </p>
               </div>
 
@@ -78,10 +77,9 @@ const Services = () => {
 
             <div className="p-4 bg-n-7 rounded-3xl overflow-hidden lg:min-h-[46rem]">
               <div className="py-12 px-4 xl:px-8">
-                <h4 className="h4 mb-4">Video generation</h4>
+                <h4 className="h4 mb-4">Analytics</h4>
                 <p className="body-2 mb-[2rem] text-n-3">
-                  The world’s most powerful AI photo and video art generation
-                  engine. What will you create?
+                  Advanced analytics and consulting services along with access to apps that perform basic analytics
                 </p>
 
                 <ul className="flex items-center justify-between">

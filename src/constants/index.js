@@ -40,27 +40,27 @@ export const navigation = [
   {
     id: "0",
     title: "Services",
-    url: "services",
+    url: "/services",
   },
   {
     id: "1",
     title: "Pricing",
-    url: "pricing",
+    url: "/pricing",
   },
   {
     id: "2",
     title: "About",
-    url: "about",
+    url: "/about",
   },
   {
     id: "3",
     title: "Blog",
-    url: "blog",
+    url: "/blog",
   },
   {
     id: "4",
     title: "Contact",
-    url: "contact",
+    url: "/contact",
   },
   {
     id: "5",
@@ -71,7 +71,7 @@ export const navigation = [
   {
     id: "6",
     title: "Log in",
-    url: "#login",
+    url: "/sign_in",
     onlyMobile: true,
   },
 ];
@@ -83,8 +83,8 @@ export const notificationImages = [notification4, notification3, notification2];
 export const companyLogos = [yourlogo, yourlogo, yourlogo, yourlogo, yourlogo];
 
 export const brainwaveServices = [
-  "Photo generating",
-  "Photo enhance",
+  "Customized Agents",
+  "AI Services",
   "Seamless Integration",
 ];
 
@@ -99,35 +99,35 @@ export const brainwaveServicesIcons = [
 export const roadmap = [
   {
     id: "0",
-    title: "Voice recognition",
-    text: "Enable the chatbot to understand and respond to voice commands, making it easier for users to interact with the app hands-free.",
-    date: "May 2023",
-    status: "done",
+    title: "Multi-Agent Frameworks with RL",
+    text: "Creating teams of agents to automate specific business departments",
+    date: "2025",
+    status: "planned",
     imageUrl: roadmap1,
     colorful: true,
   },
   {
     id: "1",
-    title: "Gamification",
-    text: "Add game-like elements, such as badges or leaderboards, to incentivize users to engage with the chatbot more frequently.",
-    date: "May 2023",
-    status: "progress",
+    title: "Multi-Agent Frameworks",
+    text: "Creating teams of agents to automate specific business departments",
+    date: "2024",
+    status: "In progress",
     imageUrl: roadmap2,
   },
   {
     id: "2",
-    title: "Chatbot customization",
+    title: "AI Agents for Specific Use Cases",
     text: "Allow users to customize the chatbot's appearance and behavior, making it more engaging and fun to interact with.",
-    date: "May 2023",
-    status: "done",
+    date: "2024",
+    status: "in progress",
     imageUrl: roadmap3,
   },
   {
     id: "3",
     title: "Integration with APIs",
-    text: "Allow the chatbot to access external data sources, such as weather APIs or news APIs, to provide more relevant recommendations.",
-    date: "May 2023",
-    status: "progress",
+    text: "Allow the Agents to access external data sources, such as weather APIs or news APIs, to provide more relevant recommendations.",
+    date: "2024",
+    status: "done",
     imageUrl: roadmap4,
   },
 ];
@@ -213,35 +213,35 @@ export const collabApps = [
 export const pricing = [
   {
     id: "0",
-    title: "Basic",
-    description: "AI chatbot, personalized recommendations",
+    title: "Free-Trial",
+    description: "AI Agents with basic functions",
     price: "0",
     features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
+      "Any Agent of your choice with basic functionality",
+      "Limited Access to Analytics",
+      "Ability to explore the profile and its features without any cost",
     ],
   },
   {
     id: "1",
     title: "Premium",
-    description: "Advanced AI chatbot, priority support, analytics dashboard",
+    description: "Multi-Agent Systems, AI Agents, priority support, analytics dashboard",
     price: "9.99",
     features: [
-      "An advanced AI chatbot that can understand complex queries",
-      "An analytics dashboard to track your conversations",
+      "AI agent teams that can automate processes",
+      "An analytics dashboard to track metrics",
       "Priority support to solve issues quickly",
     ],
   },
   {
     id: "2",
     title: "Enterprise",
-    description: "Custom AI chatbot, advanced analytics, dedicated account",
+    description: "Custom Multi-Agent Teams, Analytics Services, Dedicated Support",
     price: null,
     features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
+      "AI agents with Reinforcement Learning that are created for specific requirements of your business",
+      "Database management, analytics and consulting services",
+      "Personalized Dashboards for access to analytics",
     ],
   },
 ];
@@ -250,7 +250,7 @@ export const benefits = [
   {
     id: "0",
     title: "Ask anything",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+    text: "Lets users quickly find answers to their questions about your businesses without having to search through multiple sources.",
     backgroundUrl: "./src/assets/benefits/card-1.svg",
     iconUrl: benefitIcon1,
     imageUrl: benefitImage2,
@@ -258,7 +258,7 @@ export const benefits = [
   {
     id: "1",
     title: "Improve everyday",
-    text: "The app uses natural language processing to understand user queries and provide accurate and relevant responses.",
+    text: "Custom agents that uses natural language processing and reinforcement learning to understand user queries and provide accurate and relevant responses.",
     backgroundUrl: "./src/assets/benefits/card-2.svg",
     iconUrl: benefitIcon2,
     imageUrl: benefitImage2,
@@ -266,37 +266,37 @@ export const benefits = [
   },
   {
     id: "2",
-    title: "Connect everywhere",
-    text: "Connect with the AI chatbot from anywhere, on any device, making it more accessible and convenient.",
+    title: "Connect multiple processes",
+    text: "Connect different agents, to generate customized chains.",
     backgroundUrl: "./src/assets/benefits/card-3.svg",
     iconUrl: benefitIcon3,
     imageUrl: benefitImage2,
   },
   {
     id: "3",
-    title: "Fast responding",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+    title: "Increased productivity and efficiency",
+    text: "Higher accuracy through properly maintained and evaluated systems resulting in reduction of manual work force",
     backgroundUrl: "./src/assets/benefits/card-4.svg",
     iconUrl: benefitIcon4,
     imageUrl: benefitImage2,
     light: true,
   },
-  {
-    id: "4",
-    title: "Ask anything",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
-    backgroundUrl: "./src/assets/benefits/card-5.svg",
-    iconUrl: benefitIcon1,
-    imageUrl: benefitImage2,
-  },
-  {
-    id: "5",
-    title: "Improve everyday",
-    text: "The app uses natural language processing to understand user queries and provide accurate and relevant responses.",
-    backgroundUrl: "./src/assets/benefits/card-6.svg",
-    iconUrl: benefitIcon2,
-    imageUrl: benefitImage2,
-  },
+  // {
+  //   id: "4",
+  //   title: "Ask anything",
+  //   text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+  //   backgroundUrl: "./src/assets/benefits/card-5.svg",
+  //   iconUrl: benefitIcon1,
+  //   imageUrl: benefitImage2,
+  // },
+  // {
+  //   id: "5",
+  //   title: "Improve everyday",
+  //   text: "The app uses natural language processing to understand user queries and provide accurate and relevant responses.",
+  //   backgroundUrl: "./src/assets/benefits/card-6.svg",
+  //   iconUrl: benefitIcon2,
+  //   imageUrl: benefitImage2,
+  // },
 ];
 
 export const socials = [
