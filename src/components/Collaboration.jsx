@@ -3,8 +3,10 @@ import { collabApps, collabContent, collabText } from "../constants";
 import Button from "./Button";
 import Section from "./Section";
 import { LeftCurve, RightCurve } from "./design/Collaboration";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Collaboration = () => {
+  const navigate = useNavigate();
   return (
     <Section crosses>
       <div className="container lg:flex">
@@ -27,7 +29,7 @@ const Collaboration = () => {
             ))}
           </ul>
 
-          <Button>Try it now</Button>
+          <Button onClick={()=>navigate("/pricing#header")}>Try it now</Button>
         </div>
 
         <div className="lg:ml-auto xl:w-[38rem] mt-4">

@@ -99,6 +99,7 @@ const Contact = () => {
     <>
       <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
         <OnlyLogo />
+        <br></br>
         <SignupForm />
         <Footer />
       </div>

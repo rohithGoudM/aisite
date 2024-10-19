@@ -3,8 +3,13 @@ import { smallSphere, stars } from "../assets";
 import Heading from "./Heading";
 import PricingList from "./PricingList";
 import { LeftLine, RightLine } from "./design/Pricing";
+import { useEffect } from "react";
 
 const Pricing = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);  // Scroll to top on mount
+  }, []);
+
   return (
     <Section className="overflow-hidden" id="pricing">
       <div className="container relative z-2">

@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 import React from 'react'
 
-const EmailAutomation = () => {
+const Profile = () => {
   return (
     <>
       <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
@@ -16,5 +16,5 @@ const EmailAutomation = () => {
   )
 }
 
-export default EmailAutomation
+export default Profile
 

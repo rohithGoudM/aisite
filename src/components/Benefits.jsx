@@ -8,7 +8,7 @@ import ClipPath from "../assets/svg/ClipPath";
 const Benefits = () => {
   return (
     <Section id="features">
-      <div className="container relative z-2">
+      <div className="container relative mt-4 z-2">
         <Heading
           className="md:max-w-md lg:max-w-2xl"
           title="Work Smarter, Not Harder with QState"
