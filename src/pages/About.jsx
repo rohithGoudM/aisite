@@ -2,7 +2,6 @@ import ButtonGradient from "../assets/svg/ButtonGradient";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Roadmap from "../components/Roadmap";
-import React from 'react'
 
 const About = () => {
   return (

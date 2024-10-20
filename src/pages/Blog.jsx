@@ -2,8 +2,6 @@ import ButtonGradient from "../assets/svg/ButtonGradient";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-import React from 'react'
-
 const Blog = () => {
   return (
     <>

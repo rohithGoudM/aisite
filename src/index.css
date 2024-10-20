@@ -17,12 +17,7 @@
   scroll-behavior: smooth
 }
 
-.screen-max-width {
-  margin-inline-start: auto;
-  margin-inline-end: auto;
-  position: relative;
-  max-width: 1120px;
-}
+
 @layer base {
   body {
     @apply font-sans bg-n-8 text-n-1 text-base;

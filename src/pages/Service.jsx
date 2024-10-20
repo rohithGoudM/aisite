@@ -4,8 +4,6 @@ import Header from "../components/Header";
 import Services from "../components/Services";
 import { useEffect } from "react";
 
-import React from 'react'
-
 const Service = () => {
   useEffect(() => {
     window.scrollTo(0, 0);  // Scroll to top on mount
