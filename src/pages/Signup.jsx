@@ -1,7 +1,6 @@
 import ButtonGradient from "../assets/svg/ButtonGradient.jsx";
 import Footer from "../components/Footer.jsx";
 import OnlyLogo from "../components/OnlyLogo.jsx";
-import React from "react";
 import { Label } from "../components/ui/label.jsx";
 import { Input } from "../components/ui/input.jsx";
 import { cn } from "../utils/cn.js";
