@@ -7,6 +7,9 @@ export default {
   // Merged content configuration
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  // other Tailwind config
+  
   // Retain darkMode configuration from Code 1 (can adjust if needed)
   darkMode: ['variant', '&:not(.light *)'],
   

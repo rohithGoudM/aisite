@@ -1,34 +1,11 @@
-import { curve, heroBackground, robot } from "../assets";
-import Button from "./Button";
 import Section from "./Section";
-import { BackgroundCircles, BottomLine, Gradient } from "./design/Hero";
-import { heroIcons } from "../constants";
-import { ScrollParallax } from "react-just-parallax";
-import { useRef } from "react";
-import { useState } from "react";
-import Generating from "./Generating";
-import Notification from "./Notification";
-import CompanyLogos from "./CompanyLogos";
+import { BottomLine } from "./design/Hero";
 import { motion } from "framer-motion";
 import { AuroraBackground } from "./ui/aurora.jsx";
 import { Cover } from "./ui/cover.jsx";
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
-import { useLocation } from "react-router-dom";
-
-
 
 const Hero = () => {
-  const parallaxRef = useRef(null);
-
-  const [openNavigation, setOpenNavigation] = useState(false);
-
-  const handleClick = () => {
-    if (!openNavigation) return;
-
-    enablePageScroll();
-    setOpenNavigation(false);
-  };
-
   return (
     <Section
       className="pt-[10rem] -mt-[10.25rem]"

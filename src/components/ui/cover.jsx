@@ -50,7 +50,7 @@ export const Cover = ({
             className="h-full w-full overflow-hidden absolute inset-0">
             <motion.div
               animate={{
-                translateX: ["-50%", "0%"],
+                translateX: ["0%", "-50%"],
               }}
               transition={{
                 translateX: {
