@@ -6,14 +6,86 @@ import { Input } from "../components/ui/input.jsx";
 import { cn } from "../utils/cn.js";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-
+import { useState } from "react";
 
 function SignupForm() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted");
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    email: "",
+    password: "",
+    reEnterPassword: ""
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [message, setMessage] = useState("");
+  
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
   };
+
   const navigate = useNavigate(); // Create navigate function
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password.length < 8) {
+      alert("Password length must be greater than 8");
+      return;
+    }
+
+    // Check if passwords match
+    if (formData.password !== formData.reEnterPassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+
+    if (!isEmail) {
+      setErrorMessage("Enter a valid Email address")}
+
+    setLoading(true); // Set loading to true
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/sign_up", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstname: formData.firstname,
+          lastname: formData.lastname,
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage("Sign-up successful");
+        setTimeout(() => {navigate("/sign_in");}, 2000);
+      } else {
+        setErrorMessage(result.message || "Sign-up failed");
+      }
+    } catch (error) {
+      console.error("Error during sign-up:", error);
+      setErrorMessage("An error occurred. Please try again.");
+    } finally {
+      setLoading(false)
+    }
+
+  };
+
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
@@ -28,59 +100,92 @@ function SignupForm() {
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
           <LabelInputContainer>
             <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Yuvraj" type="text" />
+            <Input
+              id="firstname"
+              placeholder="Yuvraj"
+              type="text"
+              value={formData.firstname}
+              onChange={handleChange}
+              required
+            />
           </LabelInputContainer>
           <LabelInputContainer>
             <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Singh" type="text" />
+            <Input
+              id="lastname"
+              placeholder="Singh"
+              type="text"
+              value={formData.lastname}
+              onChange={handleChange}
+            />
           </LabelInputContainer>
         </div>
-        
+
         <LabelInputContainer className="mb-4">
           <Label htmlFor="username">User Name</Label>
-          <Input id="username" placeholder="Yuvraj" type="text" />
+          <Input
+            id="username"
+            placeholder="Yuvraj"
+            type="text"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
         </LabelInputContainer>
-        
+
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="Gradientdescent@ml.com" type="email" />
+          <Input
+            id="email"
+            placeholder="Gradientdescent@ml.com"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
         </LabelInputContainer>
-        
+
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
-        </LabelInputContainer>
-        
-        <LabelInputContainer className="mb-8">
-          <Label htmlFor="re-enter-password">Re-enter password</Label>
           <Input
-            id="re-enter-password"
+            id="password"
             placeholder="••••••••"
             type="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </LabelInputContainer>
+
+        <LabelInputContainer className="mb-8">
+          <Label htmlFor="reEnterPassword">Re-enter password</Label>
+          <Input
+            id="reEnterPassword"
+            placeholder="••••••••"
+            type="password"
+            value={formData.reEnterPassword}
+            onChange={handleChange}
+            required
           />
         </LabelInputContainer>
 
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
+          disabled={loading}
         >
           Sign up &rarr;
           <BottomGradient />
         </button>
-
+        <div className="justify-center">
+          {loading && <p className="mt-2 justify-center flex">Loading...</p>}
+          {message && <p className="text-red-500 mt-2 justify-center flex">{message}</p>}
+          {passwordError && <p className="text-red-500 justify-center flex">{passwordError}</p>}
+          {errorMessage && <p className="text-red-500 justify-center flex">{errorMessage}</p>}
+        </div>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <div className="flex flex-col space-y-4">
-          {/* <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
-          >
-            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              GitHub
-            </span>
-            <BottomGradient />
-          </button> */}
           <button
             className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="submit"
@@ -94,15 +199,17 @@ function SignupForm() {
 
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-
-          <div><p>Already a Member?</p></div>
-          <button onClick={()=>navigate("/sign_in")}
-          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          type="submit"
-        >
-          Sign In &rarr;
-          <BottomGradient />
-        </button>
+          <div>
+            <p>Already a Member?</p>
+          </div>
+          <button
+            onClick={() => navigate("/sign_in")}
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            type="submit"
+          >
+            Sign In &rarr;
+            <BottomGradient />
+          </button>
         </div>
       </form>
     </div>

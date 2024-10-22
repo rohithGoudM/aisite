@@ -6,15 +6,64 @@ import { Input } from "../components/ui/input.jsx";
 import { cn } from "../utils/cn.js";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useState } from "react";
 
 function SigninForm() {
-  const navigate = useNavigate(); // Create navigate function
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign In Form submitted");
-  };
+    setLoading(true);
+    setMessage("");
 
+    const usernameOrEmail = e.target["username-or-email"].value.trim();
+    const password = e.target.password.value.trim();
+
+    // Regex to check if the input is an email
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usernameOrEmail);
+
+    const userData = {
+      [isEmail ? "email" : "username"]: usernameOrEmail,
+      password: password,
+    };
+
+    if (!usernameOrEmail || !password) {
+      console.log("Both fields are required");
+      setLoading(false);
+      return; // Prevent submission if either field is empty
+    }
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/sign_in", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        // Checks if the response status is 200-299
+        const data = await response.json();
+        console.log("Sign-in successful", data);
+        setMessage("Sign-in successful");
+
+        setTimeout(() => {navigate("/profile");}, 2000);
+
+        // Handle successful sign-in, such as storing token or redirecting
+      } else {
+        console.log("Sign-in failed");
+        setMessage("Sign-in failed. Please check your credentials.");
+      }
+    } catch (error) {
+      console.error("Error signing in", error);
+      setMessage("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
@@ -27,27 +76,40 @@ function SigninForm() {
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
           <LabelInputContainer>
-            <Label htmlFor="username-or-email">User Name or Email Address</Label>
+            <Label htmlFor="username-or-email">
+              User Name or Email Address
+            </Label>
             <Input
               id="username-or-email"
               placeholder="username or email@address.com"
               type="text"
+              required
             />
           </LabelInputContainer>
         </div>
 
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input
+            id="password"
+            placeholder="••••••••"
+            type="password"
+            required
+          />
         </LabelInputContainer>
 
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]"
           type="submit"
+          disabled={loading}
         >
           Sign In &rarr;
           <BottomGradient />
         </button>
+        <div>
+          {message && <p className="text-red-500 mt-2 justify-center flex">{message}</p>}{" "}
+          {/* Message display */}
+        </div>
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-6 h-[1px] w-full" />
 
