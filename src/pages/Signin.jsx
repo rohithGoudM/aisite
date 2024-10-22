@@ -50,7 +50,9 @@ function SigninForm() {
         console.log("Sign-in successful", data);
         setMessage("Sign-in successful");
 
-        setTimeout(() => {navigate("/profile");}, 2000);
+        setTimeout(() => {
+          navigate("/profile");
+        }, 2000);
 
         // Handle successful sign-in, such as storing token or redirecting
       } else {
@@ -107,7 +109,9 @@ function SigninForm() {
           <BottomGradient />
         </button>
         <div>
-          {message && <p className="text-red-500 mt-2 justify-center flex">{message}</p>}{" "}
+          {message && (
+            <p className="text-red-500 mt-2 justify-center flex">{message}</p>
+          )}{" "}
           {/* Message display */}
         </div>
 
