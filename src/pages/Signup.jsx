@@ -55,7 +55,7 @@ function SignupForm() {
     setLoading(true); // Set loading to true
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/sign_up", {
+      const response = await fetch("http://127.0.0.1:5000/esign_up", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -179,9 +179,15 @@ function SignupForm() {
         </button>
         <div className="justify-center">
           {loading && <p className="mt-2 justify-center flex">Loading...</p>}
-          {message && <p className="text-red-500 mt-2 justify-center flex">{message}</p>}
-          {passwordError && <p className="text-red-500 justify-center flex">{passwordError}</p>}
-          {errorMessage && <p className="text-red-500 justify-center flex">{errorMessage}</p>}
+          {message && (
+            <p className="text-red-500 mt-2 justify-center flex">{message}</p>
+          )}
+          {passwordError && (
+            <p className="text-red-500 justify-center flex">{passwordError}</p>
+          )}
+          {errorMessage && (
+            <p className="text-red-500 justify-center flex">{errorMessage}</p>
+          )}
         </div>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
@@ -189,6 +195,7 @@ function SignupForm() {
           <button
             className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="submit"
+            onClick={() => (window.location.href = "https://127.0.0.1:5000/glogin")}
           >
             <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300 justify-center" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
