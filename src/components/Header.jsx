@@ -6,12 +6,16 @@ import MenuSvg from "../assets/svg/MenuSvg";
 import { HamburgerMenu } from "./design/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from "../authSlice";
 
 
 const Header = () => {
   const navigate = useNavigate();
   const pathname = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const toggleNavigation = () => {
     if (openNavigation) {
@@ -21,6 +25,8 @@ const Header = () => {
       
     }
   };
+
+  
 
   return (
     
@@ -63,15 +69,22 @@ const Header = () => {
           <HamburgerMenu />
         </nav>
 
-        <a
+        { !auth.isAuthenticated && <a
           onClick={() => navigate("/sign_up")}
           className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
         >
           Register
-        </a>
+        </a>}
+        { !auth.isAuthenticated && 
         <Button className="hidden lg:flex" onClick={() => navigate("/sign_in")}>
           Log in
-        </Button>
+        </Button>}
+        { auth.isAuthenticated && <a
+          onClick={() => {dispatch(logout());navigate("/");}}
+          className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
+        >
+          Logout
+        </a>}
 
         <Button
           className="ml-auto lg:hidden"
