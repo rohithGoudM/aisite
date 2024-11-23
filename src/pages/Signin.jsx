@@ -1,17 +1,50 @@
 import ButtonGradient from "../assets/svg/ButtonGradient.jsx";
 import Footer from "../components/Footer.jsx";
 import OnlyLogo from "../components/OnlyLogo.jsx";
+import GoogleAuth from "../components/googleAuth.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Label } from "../components/ui/label.jsx";
 import { Input } from "../components/ui/input.jsx";
 import { cn } from "../utils/cn.js";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../authSlice.jsx';
 
 function SigninForm() {
+  
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleGoogleLogin = async () => {
+    const response = await fetch("https://localhost:5000/glogin");
+    if (response.ok) {
+      // Checks if the response status is 200-299
+      const data = await response.json();
+      console.log("Sign-in successful", data);
+      setMessage("Sign-in successful");
+      dispatch(login({user:data, token:data["token"]}));
+
+
+      setTimeout(() => {
+        navigate("/profile/");
+        // this.props.user_details.navigate('profile', {
+        //   itemId: 86,
+        //   user_id: data._id,
+        // });
+      }, 1000);
+
+      // Handle successful sign-in, such as storing token or redirecting
+    } else {
+      console.log("Sign-in failed");
+      setMessage("Sign-in failed. Please check your credentials.");
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +69,7 @@ function SigninForm() {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/esign_in", {
+      const response = await fetch("https://localhost:5000/esign_in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,10 +82,16 @@ function SigninForm() {
         const data = await response.json();
         console.log("Sign-in successful", data);
         setMessage("Sign-in successful");
+        dispatch(login({user:data, token:data["token"]}));
+
 
         setTimeout(() => {
-          navigate("/profile");
-        }, 2000);
+          navigate("/profile/");
+          // this.props.user_details.navigate('profile', {
+          //   itemId: 86,
+          //   user_id: data._id,
+          // });
+        }, 1000);
 
         // Handle successful sign-in, such as storing token or redirecting
       } else {
@@ -117,21 +156,9 @@ function SigninForm() {
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-6 h-[1px] w-full" />
 
-        <div className="flex flex-col space-y-4 mb-4">
-          <button
-            className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="button" // Changed to button to prevent form submission
-            onClick={() =>
-              (window.location.href = "https://127.0.0.1:5000/glogin")
-            }
-          >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300 justify-center" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
-              Continue with Google
-            </span>
-            <BottomGradient />
-          </button>
-        </div>
+        <GoogleOAuthProvider clientId="857513170935-1i8o8a4ghqfad9afg1sgnf40s673tg2v.apps.googleusercontent.com">
+          <GoogleAuth />
+        </GoogleOAuthProvider>
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-6 h-[1px] w-full" />
 

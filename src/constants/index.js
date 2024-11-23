@@ -331,3 +331,5 @@ export const socials = [
     url: "#",
   },
 ];
+
+export const server_URI = "https://localhost:5000"
