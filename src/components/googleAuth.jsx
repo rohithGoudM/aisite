@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../authSlice.jsx';
-
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../authSlice.jsx";
 
 async function getUserInfo(codeResponse) {
   var response = await fetch("https://localhost:5000/google_login", {
@@ -30,7 +29,6 @@ async function getProtected() {
     .then((msg) => console.log(msg));
 }
 export default function GoogleAuth() {
-  
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -43,7 +41,8 @@ export default function GoogleAuth() {
       var userData = await getUserInfo(codeResponse);
 
       // setMessage("Sign-in successful");
-      dispatch(login({user:userData, token:userData["token"]}));
+      dispatch(login({ user: userData, token: userData["token"] }));
+      console.log("Sign in success");
       setTimeout(() => {
         navigate("/profile/");
         // this.props.user_details.navigate('profile', {
@@ -74,19 +73,17 @@ export default function GoogleAuth() {
     //   )}
     // </>
     <div className="flex flex-col space-y-4 mb-4">
-        <button
+      <button
         className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
         type="button" // Changed to button to prevent form submission
-        onClick={() =>
-            googleLogin()
-        }
-        >
+        onClick={() => googleLogin()}
+      >
         <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300 justify-center" />
         <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
-            Continue with Google
+          Continue with Google
         </span>
         <BottomGradient />
-        </button>
+      </button>
     </div>
   );
 }

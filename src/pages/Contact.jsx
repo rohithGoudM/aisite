@@ -5,7 +5,7 @@ import { Label } from "../components/ui/label.jsx";
 import { Input } from "../components/ui/input.jsx";
 import { cn } from "../utils/cn.js";
 
-function SignupForm() {
+const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
@@ -14,7 +14,7 @@ function SignupForm() {
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Contact Us
+        
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
         Feel free to enquire
@@ -98,7 +98,7 @@ const Contact = () => {
       <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
         <OnlyLogo />
         <br></br>
-        <SignupForm />
+        <ContactForm />
         <Footer />
       </div>
       <ButtonGradient />
