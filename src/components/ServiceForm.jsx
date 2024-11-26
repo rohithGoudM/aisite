@@ -30,10 +30,10 @@ const ServiceForm = () => {
     }
     const user_id = auth.user["_id"];
     const formData = new FormData();
-    formData.append("pdf", pdfUpload);
-    formData.append("excel", excelUpload);
+    formData.append(pdfUpload.name, pdfUpload);
+    formData.append(excelUpload.name, excelUpload);
     formData.append("frequency", frequency);
-    formData.append("user_id", user_id)
+    formData.append("user_id", user_id);
 
     console.log("Form submitted");
     console.log("PDF File: ", pdfUpload);
@@ -111,10 +111,10 @@ const ServiceForm = () => {
                 <option value="" disabled>
                   Choose an option...
                 </option>
-                <option value="option1">4 runs</option>
-                <option value="option2">3 runs</option>
-                <option value="option3">2 runs</option>
-                <option value="option4">1 run</option>
+                <option value="4">4 runs</option>
+                <option value="3">3 runs</option>
+                <option value="2">2 runs</option>
+                <option value="1">1 run</option>
               </select>
             </div>
           </LabelInputContainer>
@@ -144,7 +144,6 @@ const ServiceForm = () => {
     </div>
   );
 };
-
 
 const BottomGradient = () => {
   return (
