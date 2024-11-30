@@ -11,6 +11,7 @@ import Contact from "./pages/Contact.jsx"
 import "./index.css";
 import Signup from "./pages/Signup.jsx";
 import Signin from "./pages/Signin.jsx";
+import Execute from './pages/Execute.jsx';
 
 const AllRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AllRoutes = () => {
         <Route path="/sign_up" element={<Signup />}/>
         <Route path="/sign_in" element={<Signin />}/>
         <Route path="/profile" element={<Profile />}/>
+        <Route path="/execute" element={<Execute />}/>
         <Route path="/contact" element={<Contact />} /> {/* Add route for ContactUs */}
     </Routes>
   );
