@@ -35,6 +35,7 @@ export default function GoogleAuth() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [message, setMessage] = useState("");
   const googleLogin = useGoogleLogin({
     flow: "auth-code",
     onSuccess: async (codeResponse) => {
@@ -42,13 +43,10 @@ export default function GoogleAuth() {
 
       // setMessage("Sign-in successful");
       dispatch(login({ user: userData, token: userData["token"] }));
-      console.log("Sign in success");
+      console.log("Sign in success", userData);
+      setMessage("Google Sign in Successful");
       setTimeout(() => {
         navigate("/profile/");
-        // this.props.user_details.navigate('profile', {
-        //   itemId: 86,
-        //   user_id: data._id,
-        // });
       }, 1000);
     },
   });
@@ -73,6 +71,9 @@ export default function GoogleAuth() {
     //   )}
     // </>
     <div className="flex flex-col space-y-4 mb-4">
+      {message && (
+          <p className="text-teal-500 mt-2 justify-center flex">{message}</p>
+        )}
       <button
         className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
         type="button" // Changed to button to prevent form submission

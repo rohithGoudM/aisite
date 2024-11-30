@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import ButtonGradient from "../assets/svg/ButtonGradient.jsx";
 import { Label } from "./ui/label.jsx";
 import { Input } from "./ui/input.jsx";
@@ -7,6 +8,8 @@ import { useSelector } from "react-redux";
 
 const ServiceForm = () => {
   const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [frequency, setFrequency] = useState("");
@@ -44,6 +47,9 @@ const ServiceForm = () => {
     try {
       const response = await fetch("https://localhost:5000/upload_files", {
         method: "POST",
+        headers: {
+          authorization: auth.token,
+        },
         body: formData,
       });
 
@@ -52,6 +58,10 @@ const ServiceForm = () => {
         console.log("Files uploaded", data);
         setMessage("Form submitted successfully!");
       } else {
+        console.log(response)
+        if (response.msg == "Token Expired"){
+          navigate("/sign_in");
+        }
         console.log("Form submit failed");
         setMessage("Submission failed. Please check your files.");
       }
@@ -135,15 +145,17 @@ const ServiceForm = () => {
         <button
           className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
           type="button"
+          onClick={()=>navigate("/execute")}
         >
           <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
-            Request a Demo
+            Go to Agent Initiation
           </span>
         </button>
       </form>
     </div>
   );
 };
+
 
 const BottomGradient = () => {
   return (
