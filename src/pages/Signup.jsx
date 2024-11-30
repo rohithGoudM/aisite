@@ -1,6 +1,8 @@
 import ButtonGradient from "../assets/svg/ButtonGradient.jsx";
 import Footer from "../components/Footer.jsx";
 import OnlyLogo from "../components/OnlyLogo.jsx";
+import GoogleAuth from "../components/googleAuth.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Label } from "../components/ui/label.jsx";
 import { Input } from "../components/ui/input.jsx";
 import { cn } from "../utils/cn.js";
@@ -192,7 +194,7 @@ function SignupForm() {
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <div className="flex flex-col space-y-4">
-          <button
+          {/* <button
             className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="submit"
             onClick={() => (window.location.href = "https://127.0.0.1:5000/glogin")}
@@ -202,7 +204,10 @@ function SignupForm() {
               Continue with Google
             </span>
             <BottomGradient />
-          </button>
+          </button> */}
+          <GoogleOAuthProvider clientId="857513170935-1i8o8a4ghqfad9afg1sgnf40s673tg2v.apps.googleusercontent.com">
+            <GoogleAuth />
+          </GoogleOAuthProvider>
 
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
