@@ -21,8 +21,10 @@ const Execute = () => {
   const handleExecution = async ()=>{
 
     const user_id = auth.user["_id"];
+    const company_name = auth.user["company_name"]
     const formData = new FormData();
     formData.append("user_id", user_id);
+    formData.append("company_name",company_name)
 
     try {
       setLoading(true);

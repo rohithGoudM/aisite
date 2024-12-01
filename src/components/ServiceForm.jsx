@@ -32,17 +32,24 @@ const ServiceForm = () => {
       return;
     }
     const user_id = auth.user["_id"];
+    const company_name = e.target["company-name"].value.trim();
+    const agent_name = e.target["agent-name"].value.trim();
     const formData = new FormData();
     formData.append(pdfUpload.name, pdfUpload);
     formData.append(excelUpload.name, excelUpload);
     formData.append("frequency", frequency);
     formData.append("user_id", user_id);
+    formData.append("company_name", company_name);
+    formData.append("agent_name", agent_name);
 
     console.log("Form submitted");
     console.log("PDF File: ", pdfUpload);
     console.log("Excel File: ", excelUpload);
     console.log("Frequency: ", frequency);
     console.log("id: ", user_id);
+    console.log("company_name: ", company_name);
+    console.log("agent_name: ", agent_name);
+
 
     try {
       const response = await fetch("https://localhost:5000/upload_files", {
@@ -84,6 +91,24 @@ const ServiceForm = () => {
 
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:space-y-0 mb-4">
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="company-name">Company Name</Label>
+            <Input
+              id="company-name"
+              placeholder="Company Name"
+              type="text"
+              required
+            />
+          </LabelInputContainer>
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="agent-name">Agent Name</Label>
+            <Input
+              id="agent-name"
+              placeholder="Agent Name"
+              type="text"
+              required
+            />
+          </LabelInputContainer>
           <LabelInputContainer className="mb-4">
             <Label
               htmlFor="pdf-upload"
@@ -145,7 +170,7 @@ const ServiceForm = () => {
         <button
           className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
           type="button"
-          onClick={()=>navigate("/execute")}
+          onClick={() => navigate("/execute")}
         >
           <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
             Go to Agent Initiation
