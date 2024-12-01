@@ -332,4 +332,4 @@ export const socials = [
   },
 ];
 
-export const server_URI = "https://localhost:5000"
+export const server_URI = "https://qstate.in"

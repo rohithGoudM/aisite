@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const ServiceForm = () => {
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  
+
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [frequency, setFrequency] = useState("");
@@ -50,9 +50,8 @@ const ServiceForm = () => {
     console.log("company_name: ", company_name);
     console.log("agent_name: ", agent_name);
 
-
     try {
-      const response = await fetch("https://localhost:5000/upload_files", {
+      const response = await fetch("https://qstate.in/upload_files", {
         method: "POST",
         headers: {
           authorization: auth.token,
@@ -65,8 +64,8 @@ const ServiceForm = () => {
         console.log("Files uploaded", data);
         setMessage("Form submitted successfully!");
       } else {
-        console.log(response)
-        if (response.msg == "Token Expired"){
+        console.log(response);
+        if (response.msg == "Token Expired") {
           navigate("/sign_in");
         }
         console.log("Form submit failed");
@@ -180,7 +179,6 @@ const ServiceForm = () => {
     </div>
   );
 };
-
 
 const BottomGradient = () => {
   return (

@@ -9,11 +9,10 @@ import { cn } from "../utils/cn.js";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../authSlice.jsx';
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../authSlice.jsx";
 
 function SigninForm() {
-  
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
@@ -22,14 +21,13 @@ function SigninForm() {
   const [loading, setLoading] = useState(false);
 
   const handleGoogleLogin = async () => {
-    const response = await fetch("https://localhost:5000/glogin");
+    const response = await fetch("https://qstate.in/glogin");
     if (response.ok) {
       // Checks if the response status is 200-299
       const data = await response.json();
       console.log("Sign-in successful", data);
       setMessage("Sign-in successful");
-      dispatch(login({user:data, token:data["token"]}));
-
+      dispatch(login({ user: data, token: data["token"] }));
 
       setTimeout(() => {
         navigate("/profile/");
@@ -44,7 +42,7 @@ function SigninForm() {
       console.log("Sign-in failed");
       setMessage("Sign-in failed. Please check your credentials.");
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,7 +67,7 @@ function SigninForm() {
     }
 
     try {
-      const response = await fetch("https://localhost:5000/esign_in", {
+      const response = await fetch("https://qstate.in/esign_in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,8 +80,7 @@ function SigninForm() {
         const data = await response.json();
         console.log("Sign-in successful", data);
         setMessage("Sign-in successful");
-        dispatch(login({user:data, token:data["token"]}));
-
+        dispatch(login({ user: data, token: data["token"] }));
 
         setTimeout(() => {
           navigate("/profile/");

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { login } from "../authSlice.jsx";
 
 async function getUserInfo(codeResponse) {
-  var response = await fetch("https://localhost:5000/google_login", {
+  var response = await fetch("https://qstate.in/google_login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -72,8 +72,8 @@ export default function GoogleAuth() {
     // </>
     <div className="flex flex-col space-y-4 mb-4">
       {message && (
-          <p className="text-teal-500 mt-2 justify-center flex">{message}</p>
-        )}
+        <p className="text-teal-500 mt-2 justify-center flex">{message}</p>
+      )}
       <button
         className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
         type="button" // Changed to button to prevent form submission
