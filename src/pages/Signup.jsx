@@ -57,7 +57,7 @@ function SignupForm() {
     setLoading(true); // Set loading to true
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/esign_up", {
+      const response = await fetch(import.meta.env.VITE_QSTATE_DOMAIN+"/esign_up", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +182,7 @@ function SignupForm() {
         <div className="justify-center">
           {loading && <p className="mt-2 justify-center flex">Loading...</p>}
           {message && (
-            <p className="text-red-500 mt-2 justify-center flex">{message}</p>
+            <p className="text-teal-500 mt-2 justify-center flex">{message}</p>
           )}
           {passwordError && (
             <p className="text-red-500 justify-center flex">{passwordError}</p>

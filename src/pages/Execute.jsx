@@ -27,7 +27,7 @@ const Execute = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("https://qstate.in/execute/", {
+      const response = await fetch(import.meta.env.VITE_QSTATE_DOMAIN+"/execute/", {
         method: "POST",
         headers: {
           authorization: auth.token,
@@ -57,10 +57,11 @@ const Execute = () => {
     setLoading(true);
     const userId = auth.user["_id"]; // Replace with actual user ID logic
     try {
-      const response = await fetch(`https://qstate.in/get-auth-url/${userId}`);
+      const response = await fetch(`${import.meta.env.VITE_QSTATE_DOMAIN}/get-auth-url/${userId}`);
       const data = await response.json();
       // setAuthUrl(data.auth_url);
-
+      console.log(data)
+      console.log(data.auth_url);
       // Open the URL in a new window
       window.open(data.auth_url, "_blank");
     } catch (error) {
@@ -87,6 +88,7 @@ const Execute = () => {
       }
       const data = await response.json();
       dispatch(login({ user: data, token: data["token"] }));
+      console.log(auth)
     } catch (err) {
       setError(err.message);
       // navigate("/sign_in");
@@ -125,13 +127,13 @@ const Execute = () => {
               className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
               type="button"
               disabled={loading}
-              onClick={() => fetchAuthUrl()}
+              onClick={() => {fetchUser();fetchAuthUrl()}}
             >
               <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
                 Create Token
               </span>
             </button>
-            <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+            {/* <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
             <button
               className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
               type="button"
@@ -141,7 +143,7 @@ const Execute = () => {
               <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
                 Refresh
               </span>
-            </button>
+            </button> */}
           </div>
         )}
         {/* {message && (
@@ -153,12 +155,23 @@ const Execute = () => {
               className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
               type="button"
               disabled={loading}
-              onClick={() => handleExecution()}
+              onClick={() => {fetchUser();handleExecution()}}
             >
               <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
-                {message ? message : "Execute"}
+                {loading ? "Executing..." : "Execute"}
               </span>
             </button>
+            {/* <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+            <button
+              className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+              type="button"
+              disabled={loading}
+              onClick={() => fetchUser()}
+            >
+              <span className="text-neutral-700 dark:text-neutral-300 text-sm justify-center">
+                Refresh
+              </span>
+            </button> */}
           </div>
         )}
 

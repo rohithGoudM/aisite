@@ -332,4 +332,4 @@ export const socials = [
   },
 ];
 
-export const server_URI = "https://qstate.in"
+export const server_URI = import.meta.env.VITE_QSTATE_DOMAIN

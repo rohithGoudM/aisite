@@ -51,7 +51,7 @@ const ServiceForm = () => {
     console.log("agent_name: ", agent_name);
 
     try {
-      const response = await fetch("https://qstate.in/upload_files", {
+      const response = await fetch(import.meta.env.VITE_QSTATE_DOMAIN+"/upload_files", {
         method: "POST",
         headers: {
           authorization: auth.token,

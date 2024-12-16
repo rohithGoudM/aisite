@@ -18,10 +18,11 @@ function SigninForm() {
 
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleGoogleLogin = async () => {
-    const response = await fetch("https://qstate.in/glogin");
+    const response = await fetch(import.meta.env.VITE_QSTATE_DOMAIN+"/glogin");
     if (response.ok) {
       // Checks if the response status is 200-299
       const data = await response.json();
@@ -40,7 +41,7 @@ function SigninForm() {
       // Handle successful sign-in, such as storing token or redirecting
     } else {
       console.log("Sign-in failed");
-      setMessage("Sign-in failed. Please check your credentials.");
+      setErrorMessage("Sign-in failed. Please check your credentials.");
     }
   };
 
@@ -48,6 +49,7 @@ function SigninForm() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+    setErrorMessage("");
 
     const usernameOrEmail = e.target["username-or-email"].value.trim();
     const password = e.target.password.value.trim();
@@ -65,9 +67,9 @@ function SigninForm() {
       setLoading(false);
       return; // Prevent submission if either field is empty
     }
-
+    console.log(import.meta.env.VITE_QSTATE_DOMAIN)
     try {
-      const response = await fetch("https://qstate.in/esign_in", {
+      const response = await fetch(import.meta.env.VITE_QSTATE_DOMAIN+"/esign_in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,11 +95,11 @@ function SigninForm() {
         // Handle successful sign-in, such as storing token or redirecting
       } else {
         console.log("Sign-in failed");
-        setMessage("Sign-in failed. Please check your credentials.");
+        setErrorMessage("Sign-in failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("Error signing in", error);
-      setMessage("An unexpected error occurred. Please try again.");
+      setErrorMessage("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -146,9 +148,12 @@ function SigninForm() {
         </button>
         <div>
           {message && (
-            <p className="text-red-500 mt-2 justify-center flex">{message}</p>
+            <p className="text-teal-500 mt-2 justify-center flex">{message}</p>
           )}{" "}
           {/* Message display */}
+          {errorMessage && (
+            <p className="text-red-500 mt-2 justify-center flex">{errorMessage}</p>
+          )}
         </div>
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-6 h-[1px] w-full" />

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { login } from "../authSlice.jsx";
 
 async function getUserInfo(codeResponse) {
-  var response = await fetch("https://qstate.in/google_login", {
+  var response = await fetch(import.meta.env.VITE_QSTATE_DOMAIN+"/google_login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
